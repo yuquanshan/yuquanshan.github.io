@@ -23,7 +23,7 @@
 
     <div id = "content">
         <h3>Contact</h3>
-        <p><b>Email - </b>springshan13@gmail.com</p>
+        <p id = "email"></p>
         <p><b>Others - </b><a href="https://github.com/yuquanshan", target=”_blank”>GitHub</a> <a href="https://linkedin.com/in/yuquanshan", target=”_blank”>LinkedIn</a> <a href="https://www.facebook.com/yuquan.shan.1", target=”_blank”>Facebook</a></p>
     </div>
 
@@ -47,6 +47,8 @@ const doing = ["discovering.", "coding.", "thinking.", "hacking.", "wondering.",
 const padding = 12;
 const speed = 100;
 const pause = 800;
+
+document.getElementById("email").innerHTML = "<b>Email - </b>spr" + doing[1].substring(3, 6) + "sh" + doing[6].substring(1, 3) + "13@gmail.com"
 
 function typewords() {
     if (j < doing[i].length) {
