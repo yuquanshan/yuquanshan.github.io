@@ -11,7 +11,7 @@
 <div id="container" align="center">
     <div id="header">
         <h1>Yuquan Shan</h1>
-        <h2 id="flashy"></h2>
+        <h2 id="flashy" onmouseleave="freezeTrue()" onmouseenter="freezeFalse()"></h2>
     </div>
 
     <div id="content">
@@ -43,6 +43,7 @@
 <script>
 var i = 0;
 var j = 0;
+var freeze = false;
 const base = 'The dude that is ';
 const doing = ["discovering.", "coding.", "thinking.", "hacking.", "wondering.", "learning.", "wandering.", "meditating.", "sleeping."];
 const padding = 12;
@@ -71,7 +72,9 @@ function typewords() {
 }
 
 function delwords() {
-    if (j > 0) {
+    if (j == doing[i].length && freeze) {
+        setTimeout(delwords, speed);
+    } else if (j > 0) {
         var tmp = base + doing[i].substring(0, --j);
         tmp = tmp + "&#x2588"
         var k;
@@ -84,6 +87,14 @@ function delwords() {
         i = (i + 1) % doing.length
         setTimeout(typewords, pause);
     }
+}
+
+function freezeTrue() {
+  freeze = true;
+}
+
+function freezeFalse() {
+  freeze = false;
 }
 
 typewords()
