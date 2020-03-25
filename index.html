@@ -54,6 +54,7 @@ document.getElementById("email").innerHTML = "<b>Email - </b>spr" + doing[1].sub
 function typewords() {
     if (j < doing[i].length) {
         var tmp = base + doing[i].substring(0, ++j);
+        tmp = tmp + "&#x2588"
         var k;
         for (k = 0; k < padding - j; k++) {
             tmp = tmp + "&nbsp;";
@@ -72,6 +73,7 @@ function typewords() {
 function delwords() {
     if (j > 0) {
         var tmp = base + doing[i].substring(0, --j);
+        tmp = tmp + "&#x2588"
         var k;
         for (k = 0; k < padding - j; k++) {
             tmp = tmp + "&nbsp;";
