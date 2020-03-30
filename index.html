@@ -178,10 +178,10 @@ class Text {
 }
 
 class Expandable {
-  constructor(content) {
+  constructor(content, offset) {
     this.freeze = true;
     this.words = content;
-    this.offset = -1;
+    this.offset = offset;
     this.wordsIdx = 0;
     this.deleting = false;
     this.pause = false;
@@ -228,8 +228,10 @@ class Expandable {
 }
 
 text = new Text();
-genre = new Expandable(["Jamiroquai (funk) and ...", "Kendrick Lamar + 21 Savage (hip-hop) and ...", "The Lumineers (folk rock) and ...", "Kenshi Yonezu (j-pop) and ...", "Vampire Weekend (alter rock) and ..."]);
-game = new Expandable(["Dragon Age series and ...", "Elder Scrolls series and ...", "GTA series and ...", "The Sims series and ...", "Nobunaga's Ambition series and ...", "Cities: Skylines and ...", "Mount and Blade and ..."]);
+genres = ["Jamiroquai (funk) and ...", "Kendrick Lamar + 21 Savage + Tyga (hip-hop) and ...", "The Lumineers (folk rock) and ...", "Kenshi Yonezu (j-pop) and ...", "Vampire Weekend (alter rock) and ..."];
+genre = new Expandable(genres, genres[0].length - 1);
+games = ["Dragon Age series and ...", "Elder Scrolls series and ...", "GTA series and ...", "The Sims series and ...", "Nobunaga's Ambition series and ...", "Cities: Skylines and ...", "Mount and Blade and ..."];
+game = new Expandable(games, games[0].length - 1);
 
 document.getElementById("email").innerHTML = "<b>Email - </b>spr" + text.getDoing[1].substring(3, 6) + "sh" + text.getDoing[6].substring(1, 3) + "13@gmail.com"
 
