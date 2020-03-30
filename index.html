@@ -30,10 +30,10 @@
 
     <div id = "content">
         <h3>Hobbies</h3>
-        <p><b>Computer Games - </b> Here are the games that I feel comfortable to discuss (or debate :P): Dragon Age series, Elder Scrolls series, GTA series, The Sims series, Nobunaga's Ambition series, Cities: Skylines.</p>
+        <p><b>Computer Games - </b> Here are the games that I feel comfortable to discuss (or debate :P): <span id = "game" onmouseleave="freezeGame()" onmouseenter="defreezeGame()" onclick="deleteGame()"></span></p>
         <p><b>Basketball - </b>Bench guy; PF/SF/SG; high school jersey: #13; college jersey: #33.</p>
+        <p><b>Music -  </b> Amateur guitar player. Sometimes pluck for inspiration, aka make noise. My flow: <span id = "genre" onmouseleave="freezeGenre()" onmouseenter="defreezeGenre()" onclick="deleteGenre()"></span></p>
         <p><b>Readings - </b> Good way to learn new things as well as fall asleep. <a href="docs/vocabook.html"><font color="#FFFFFF">voca</font></a></p>
-        <p><b>Music -  </b> Amateur guitar player. Sometimes pluck for inspiration, aka make noise. My flow: <span id = "genre" onmouseleave="freezeGenre()" onmouseenter="defreezeGenre()"></span></p>
     </div>
 
     <div id="footer">
@@ -177,10 +177,10 @@ class Text {
   }
 }
 
-class Genre {
-  constructor() {
+class Expandable {
+  constructor(content) {
     this.freeze = true;
-    this.words = ["Jamiroquai (funk) and ...", "Kendrick Lamar + 21 Savage (hip-hop) and ...", "The Lumineers (folk rock) and ...", "Kenshi Yonezu (j-pop) and ...", "Vampire Weekend (alter rock) and ..."];
+    this.words = content;
     this.offset = -1;
     this.wordsIdx = 0;
     this.deleting = false;
@@ -221,10 +221,15 @@ class Genre {
   set setFreeze(i) {
     this.freeze = i;
   }
+
+  set delete(i) {
+    this.deleting = i;
+  }
 }
 
 text = new Text();
-genre = new Genre();
+genre = new Expandable(["Jamiroquai (funk) and ...", "Kendrick Lamar + 21 Savage (hip-hop) and ...", "The Lumineers (folk rock) and ...", "Kenshi Yonezu (j-pop) and ...", "Vampire Weekend (alter rock) and ..."]);
+game = new Expandable(["Dragon Age series and ...", "Elder Scrolls series and ...", "GTA series and ...", "The Sims series and ...", "Nobunaga's Ambition series and ...", "Cities: Skylines and ...", "Mount and Blade and ..."]);
 
 document.getElementById("email").innerHTML = "<b>Email - </b>spr" + text.getDoing[1].substring(3, 6) + "sh" + text.getDoing[6].substring(1, 3) + "13@gmail.com"
 
@@ -246,6 +251,7 @@ function freezeFalse() {
 }
 
 function switchMode() {
+  freezeTrue();
   text.switchMode();
 }
 
@@ -266,8 +272,34 @@ function defreezeGenre() {
   genre.setFreeze = false;
 }
 
+function deleteGenre() {
+  genre.delete = true;
+}
+
+function typegame() {
+  document.getElementById("game").innerHTML = game.genTextAndAdvance();
+  if (game.shouldPause) {
+    setTimeout(typegame, pause);
+  } else {
+    setTimeout(typegame, speedFast);
+  }
+}
+
+function freezeGame() {
+  game.setFreeze = true;
+}
+
+function defreezeGame() {
+  game.setFreeze = false;
+}
+
+function deleteGame() {
+  game.delete = true;
+}
+
 typewords();
 typegenre();
+typegame();
 </script>
 
 </body>
