@@ -11,7 +11,7 @@
 <div id="container" align="center">
     <div id="header">
         <h1>Yuquan Shan</h1>
-        <h2 id="flashy" onmouseleave="freezeTrue()" onmouseenter="freezeFalse()" onclick="activateDDF()"></h2>
+        <h2 id="flashy" onmouseleave="freezeTrue()" onmouseenter="freezeFalse()" onclick="switchMode()"></h2>
     </div>
 
     <div id="content">
@@ -64,6 +64,8 @@ class Text {
     this.freeze = true;
     this.aboutToDel = false;
     this.aboutToTp = true;
+    this.recoveringToNormal = false;
+    this.transToDDF = false;
   }
 
   // TODO(yuquanshan): ugly code, huge space for refactoring
@@ -105,11 +107,22 @@ class Text {
       if (this.deleting) {
         if (this.offset == 3) {
           this.deleting = false;
+          if (this.recoveringToNormal) {
+            this.recoveringToNormal = false;
+            this.mode = PlayMode.NORMAL;
+          }
+          if (this.transToDDF) {
+            this.transToDDF = false;
+          }
         }
-        if (this.offset < this.base.length) {
-          tmp = this.base.substring(0, this.offset + 1)
+        if (this.recoveringToNormal && !this.transToDDF) {
+          tmp = this.ddf.substring(0, this.offset + 1);
         } else {
-          tmp = this.base + this.doing[this.doingIdx].substring(0, this.offset - this.base.length + 1)
+          if (this.offset < this.base.length) {
+            tmp = this.base.substring(0, this.offset + 1)
+          } else {
+            tmp = this.base + this.doing[this.doingIdx].substring(0, this.offset - this.base.length + 1)
+          }
         }
         tmp = tmp + "&#x2588"
         var tofill = this.padding - tmp.length;
@@ -142,9 +155,13 @@ class Text {
     return this.aboutToDel;
   }
 
-  switchToDDF() {
+  switchMode() {
     if (this.mode != PlayMode.DDF) {
       this.mode = PlayMode.DDF;
+      this.transToDDF = true;
+      this.deleting = true;
+    } else if (this.mode == PlayMode.DDF) {
+      this.recoveringToNormal = true;
       this.deleting = true;
     }
   }
@@ -179,8 +196,8 @@ function freezeFalse() {
   text.setFreeze = false;
 }
 
-function activateDDF() {
-  text.switchToDDF();
+function switchMode() {
+  text.switchMode();
 }
 
 typewords();
