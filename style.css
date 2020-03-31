@@ -29,7 +29,7 @@ p{
     background-color:inherit;
 }
 b{
-    color:#666;
+    color:#455;
     text-decoration:none;
     font:Verdana, Arial, Helvetica, sans-serif;
     font-weight:bold;
@@ -63,7 +63,7 @@ img.right{float:right; margin:0 0 5px 10px;}
     color:#123;
 }
 #header h1{
-    color:#666;
+    color:#455;
     font-family:"Courier New", Courier, monospace;
     font-weight:bolder;
     text-align:center;
@@ -73,7 +73,7 @@ img.right{float:right; margin:0 0 5px 10px;}
     background-color:inherit;
 }
 #header h2{
-    color:#666;
+    color:#455;
     font-family:"Courier New", Courier, monospace;
     font-weight:bold;
     text-align:center;
@@ -147,7 +147,7 @@ img.right{float:right; margin:0 0 5px 10px;}
 
 #content h3{
     font-family:"Courier New", Courier, monospace;
-    color:#666;
+    color:#455;
     background-color:inherit;
     font-weight:bold;
     font-size:200%;
