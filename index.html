@@ -275,6 +275,7 @@ function defreezeGenre() {
 }
 
 function deleteGenre() {
+  freezeGenre();
   genre.delete = true;
 }
 
@@ -296,6 +297,7 @@ function defreezeGame() {
 }
 
 function deleteGame() {
+  freezeGame();
   game.delete = true;
 }
 
